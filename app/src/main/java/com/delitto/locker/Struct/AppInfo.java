@@ -12,6 +12,14 @@ public class AppInfo {
     private String packageName;
     private Drawable appIcon;
 
+    public AppInfo(){ }
+
+    public AppInfo(String appName, String packageName, Drawable appIcon){
+        setAppIcon(appIcon);
+        setAppNmae(appName);
+        setPackageName(packageName);
+    }
+
     public String getAppName(){
         return appName;
     }
