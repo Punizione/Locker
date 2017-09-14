@@ -11,5 +11,7 @@ public class Rule {
 
     private long remainingTime;
 
-    public void refreshCycle(){}
+    public void refreshCycle(){
+
+    }
 }
