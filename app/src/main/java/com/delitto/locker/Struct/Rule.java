@@ -40,6 +40,6 @@ public class Rule {
 
 
     public void refreshCycle(){
-
+        this.remainingTime = cycle.timeFormat();
     }
 }

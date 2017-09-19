@@ -28,4 +28,10 @@ public class TimeCycle {
         this.denominatorUnit = denominatorUnit;
     }
 
+    public long timeFormat(){
+        long remainingTime = 0L;
+        remainingTime = numerator*TimeUnit.farmat(numeratorUnit);
+        return remainingTime;
+    }
+
 }
