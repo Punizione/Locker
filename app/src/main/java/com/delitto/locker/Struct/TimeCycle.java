@@ -30,7 +30,7 @@ public class TimeCycle {
 
     public long timeFormat(){
         long remainingTime = 0L;
-        remainingTime = numerator*TimeUnit.farmat(numeratorUnit);
+        remainingTime = numerator*TimeUnit.format(numeratorUnit);
         return remainingTime;
     }
 

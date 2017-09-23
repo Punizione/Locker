@@ -13,7 +13,7 @@ public enum TimeUnit {
     Week,
     Month;
 
-    public static long farmat(TimeUnit tu){
+    public static long format(TimeUnit tu){
         long res = 0L;
         switch (tu){
             case Minute:
