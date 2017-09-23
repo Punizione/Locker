@@ -1,5 +1,6 @@
 package com.delitto.locker.Struct;
 
+
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
@@ -42,6 +43,11 @@ public class AppInfo {
 
     public  void setAppIcon(Drawable appIcon){
         this.appIcon = appIcon;
+    }
+
+    @Override
+    public boolean equals(Object that){
+        return (that instanceof AppInfo) && this.appName.equals(((AppInfo) that).getAppName());
     }
 
     public void print(){

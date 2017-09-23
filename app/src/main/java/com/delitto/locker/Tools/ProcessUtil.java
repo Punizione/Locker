@@ -40,21 +40,18 @@ public class ProcessUtil {
         UsageStatsManager mUasgeStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
         List<UsageStats> usageStats = mUasgeStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_BEST, timeStamp-1000*10, timeStamp);
         if(usageStats == null || usageStats.size() == 0){
-            if(havePermission(context) == false){
+            if(!havePermission(context)){
                 Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
-                Toast.makeText(context, Constants.NOT_PERMISSION_ENOUGH, Toast.LENGTH_SHORT);
+                Toast.makeText(context, Constants.NOT_PERMISSION_ENOUGH, Toast.LENGTH_SHORT).show();
             }
             return false;
         }
         Collections.sort(usageStats, mRecentComparator);
         String currentTopPackage = usageStats.get(0).getPackageName();
-        if(currentTopPackage.equals(packageName)){
-            return true;
-        }else{
-            return false;
-        }
+
+        return currentTopPackage.equals(packageName);
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)

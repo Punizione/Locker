@@ -18,7 +18,7 @@
                 android:layout_height="50dp"
                 app:civ_border_color="@color/border_color"
                 app:civ_border_width="1dp"
-                tools:src="@drawable/logo" />
+                tools:src="@drawable/defaultIcon" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

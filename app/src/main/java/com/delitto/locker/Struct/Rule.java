@@ -11,6 +11,14 @@ public class Rule {
 
     private long remainingTime;
 
+    public Rule(){ }
+
+    public Rule(AppInfo targetApp, TimeCycle cycle){
+        this.targetApp = targetApp;
+        this.cycle = cycle;
+        this.isWorking = true;
+        this.remainingTime = cycle.timeFormat();
+    }
     public AppInfo getTargetApp(){
         return targetApp;
     }
@@ -23,7 +31,7 @@ public class Rule {
     }
 
     public void changeWorking(){
-        isWorking = isWorking==true?false:true;
+        isWorking = !isWorking;
     }
 
     public TimeCycle getCycle(){
@@ -42,4 +50,12 @@ public class Rule {
     public void refreshCycle(){
         this.remainingTime = cycle.timeFormat();
     }
+
+    @Override
+    public boolean equals(Object that){
+        return (that instanceof Rule) && this.targetApp.equals(((Rule) that).getTargetApp());
+    }
+
+
+
 }
