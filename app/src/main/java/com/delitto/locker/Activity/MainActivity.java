@@ -1,5 +1,6 @@
 package com.delitto.locker.Activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,10 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.delitto.locker.Adapter.RuleAdapter;
 import com.delitto.locker.R;
+import com.delitto.locker.Struct.AppInfo;
 import com.delitto.locker.Struct.Rule;
+import com.delitto.locker.Struct.TimeCycle;
+import com.delitto.locker.Struct.TimeUnit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        Rule rule = new Rule();
+        ImageView I = new ImageView(this);
+        I.setImageResource(R.drawable.defaulticon);
+        Rule rule = new Rule(new AppInfo("Test","Test",I.getDrawable()),new TimeCycle(1, TimeUnit.Day,2,TimeUnit.Day));
         List<Rule> li = new ArrayList<>();
         li.add(rule);
         mAdapter = new RuleAdapter(li);

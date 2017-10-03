@@ -28,6 +28,14 @@ public class TimeCycle {
         this.denominatorUnit = denominatorUnit;
     }
 
+    public TimeCycle(){}
+
+    public TimeCycle(int numerator,TimeUnit numeratorUnit, int denominator,TimeUnit denominatorUnit){
+        setNumerator(numerator);
+        setNumeratorUnit(numeratorUnit);
+        setDenominator(denominator);
+        setDenominatorUnit(denominatorUnit);
+    }
     public long timeFormat(){
         long remainingTime = 0L;
         remainingTime = numerator*TimeUnit.format(numeratorUnit);

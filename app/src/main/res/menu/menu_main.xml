@@ -2,22 +2,11 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.delitto.locker.Activity.MainActivity">
-    <group
-        android:id="@+id/action_group"
-        android:checkableBehavior="single"
-        >
+
         <item
-            android:id="@+id/showAll"
-            android:title="@string/action_all"
+            android:id="@+id/action_settings"
+            android:title="Settings"
+            android:checked="true"
             app:showAsAction="never"/>
-        <item
-            android:id="@+id/showUser"
-            android:title="@string/action_user"
-            app:showAsAction="never" />
-        <item
-            android:id="@+id/showSystem"
-            android:title="@string/action_system"
-            app:showAsAction="never"
-            />
-    </group>
+
 </menu>

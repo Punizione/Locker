@@ -13,4 +13,9 @@ public class Constants {
 
     public static String NOT_PERMISSION_ENOUGH = "权限不足\n请打开手机设置，为Locker授权查看使用情况";
 
+
+    public static int GET_APPINFO_ERROR = -1;
+    public static int GET_APPINFO_SUCCESS = 0;
+
+
 }
