@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.delitto.locker.Adapter.AppInfoAdapter;
 import com.delitto.locker.R;
@@ -37,6 +40,23 @@ public class SelectActivity extends AppCompatActivity {
         List<AppInfo> list = InfoUtil.getAllAppInfo(this, Constants.ALL_APPLICATIONS);
         mAdapter = new AppInfoAdapter(list);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+
+    public boolean onGroupItemClick(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.showAll:
+                return true;
+            default:
+                return true;
+        }
     }
 
 

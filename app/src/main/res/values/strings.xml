@@ -3,4 +3,8 @@
     <string name="action_settings">Settings</string>
     <string name="versionNumber">Version 0.1.0</string>
     <string name="splash">Splash</string>
+
+    <string name="action_all">所有应用</string>
+    <string name="action_user">用户应用</string>
+    <string name="action_system">系统应用</string>
 </resources>
