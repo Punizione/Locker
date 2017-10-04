@@ -1,6 +1,7 @@
 package com.delitto.locker.Activity;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,12 +24,14 @@ import java.util.List;
 
 import com.delitto.locker.Tools.Constants;
 import com.delitto.locker.Tools.InfoUtil;
+import com.delitto.locker.Tools.TestUtil;
+
 /**
  * Created by Delitto on 2017/10/3.
  */
 
 public class SelectActivity extends AppCompatActivity {
-    final  private String tag = "SelectActivity";
+    final private String tag = "SelectActivity";
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -38,11 +41,11 @@ public class SelectActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.appinfoToolbar);
-        setSupportActionBar(toolbar);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appinfoToolbar);
+        setSupportActionBar(toolbar);
 
         mRecyclerView = (RecyclerView)findViewById(R.id.select_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -71,12 +74,22 @@ public class SelectActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.showAll:
                 refreshAppInfo(Constants.ALL_APPLICATIONS);
+
+                if(!item.isChecked()){
+                    item.setChecked(true);
+                }
                 return true;
             case R.id.showSystem:
                 refreshAppInfo(Constants.SYSTEM_INSTALLED_APPLICATIONS);
+                if(!item.isChecked()){
+                    item.setChecked(true);
+                }
                 return true;
             case R.id.showUser:
                 refreshAppInfo(Constants.USER_INSTALLED_APPLICATIONS);
+                if(!item.isChecked()){
+                    item.setChecked(true);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -85,6 +98,7 @@ public class SelectActivity extends AppCompatActivity {
 
 
     public void refreshAppInfo(final int filter){
+     //   TestUtil.makeTest(this);
         new AsyncTask<Void, Void, Integer>(){
             @Override
             protected void onPreExecute(){}
@@ -93,6 +107,7 @@ public class SelectActivity extends AppCompatActivity {
             protected Integer doInBackground(Void ... params){
                 try{
                     list = InfoUtil.getAllAppInfo(getBaseContext(), filter);
+                    System.out.println(list.size());
                 }catch (Exception e){
                     e.printStackTrace();
                     return Constants.GET_APPINFO_ERROR;
@@ -107,18 +122,18 @@ public class SelectActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Integer code){
+//                TestUtil.makeTest(SelectActivity.this, "Execute");
                 if(code == Constants.GET_APPINFO_ERROR){
                     Toast.makeText(getBaseContext(),"刷新失败",Toast.LENGTH_SHORT).show();
                 }else if(code == Constants.GET_APPINFO_SUCCESS){
-                    if(mAdapter == null){
+              //      if(mAdapter == null){
                         mAdapter =  new AppInfoAdapter(list);
-                    }
+              //      }
+                    mRecyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
 
                 }
             }
-
-
 
         }.execute();
     }
