@@ -10,7 +10,7 @@ public class Rule {
     private TimeCycle cycle;
 
     private long remainingTime;
-
+    private long cycleTime;
     public Rule(){ }
 
     public Rule(AppInfo targetApp, TimeCycle cycle){
@@ -18,6 +18,7 @@ public class Rule {
         this.cycle = cycle;
         this.isWorking = true;
         this.remainingTime = cycle.timeFormat();
+        this.cycleTime = cycle.timeFormatWithCycle();
     }
     public AppInfo getTargetApp(){
         return targetApp;

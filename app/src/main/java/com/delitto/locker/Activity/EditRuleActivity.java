@@ -6,6 +6,6 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Delitto on 2017/9/23.
  */
 
-public class AddRuleActivity extends AppCompatActivity{
+public class EditRuleActivity extends AppCompatActivity{
 
 }

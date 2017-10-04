@@ -42,4 +42,10 @@ public class TimeCycle {
         return remainingTime;
     }
 
+    public long timeFormatWithCycle(){
+        long cycleTime = 0L;
+        cycleTime = denominator*TimeUnit.format(denominatorUnit);
+        return cycleTime;
+    }
+
 }

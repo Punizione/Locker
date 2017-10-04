@@ -126,6 +126,7 @@ public class SelectActivity extends AppCompatActivity {
                 if(code == Constants.GET_APPINFO_ERROR){
                     Toast.makeText(getBaseContext(),"刷新失败",Toast.LENGTH_SHORT).show();
                 }else if(code == Constants.GET_APPINFO_SUCCESS){
+                    //真让人摸不着头脑.jpg
               //      if(mAdapter == null){
                         mAdapter =  new AppInfoAdapter(list);
               //      }
