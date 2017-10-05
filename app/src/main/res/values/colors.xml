@@ -7,8 +7,8 @@
     <color name="splash">#03a9f4</color>
 
 
-
-
+    <!--RecyclerView page background-->
+    <color name="page_background">#efefef</color>
 
     <color name="primary">#03a9f4</color>
     <color name="primary_dark">#0091ea</color>

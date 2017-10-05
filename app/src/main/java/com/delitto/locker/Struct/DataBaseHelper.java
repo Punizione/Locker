@@ -122,6 +122,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db = null;
     }
 
+    public  void update(Rule rule)throws Exception{
+        // TODO: 2017/10/5
+    }
+
     public Cursor select(){
         if(db==null){
             db = this.getReadableDatabase();

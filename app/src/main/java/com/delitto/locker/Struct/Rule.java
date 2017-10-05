@@ -33,9 +33,11 @@ public class Rule {
         this.remainingTime = lessTime;
         this.cycleTime = cycleTime;
     }
+
     public AppInfo getTargetApp(){
         return targetApp;
     }
+
     public void setTargetApp(AppInfo targetApp){
         this.targetApp = targetApp;
     }
