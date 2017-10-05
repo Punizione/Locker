@@ -21,6 +21,7 @@ public class Constants {
     public final static int UPDATE_RULE_LESSTIME = 2;
     public final static int UPDATE_CYCLETIME = 3;
     public final static int UPDATE_RULE_CYCLETIME = 4;
+    public final static int UPDATE_RULE_ISWORKING = 5;
 
 
 }

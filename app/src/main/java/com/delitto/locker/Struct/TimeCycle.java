@@ -21,6 +21,13 @@ public class TimeCycle {
         setDenominatorUnit(denominatorUnit);
     }
 
+    public TimeCycle(long ruleLessTime, long ruleCycleTime){
+        setNumeratorUnit(TimeUnit.fromLongToTimeUnit(ruleLessTime));
+        setNumerator((int)(ruleLessTime/TimeUnit.fromTimeUnitToLong(this.getNumeratorUnit())));
+        setDenominatorUnit(TimeUnit.fromLongToTimeUnit(ruleCycleTime));
+        setDenominator((int)(ruleCycleTime/TimeUnit.fromTimeUnitToLong(this.getDenominatorUnit())));
+    }
+
     public void setNumerator(int numerator) {
         this.numerator = numerator;
     }
@@ -37,20 +44,27 @@ public class TimeCycle {
         this.denominatorUnit = denominatorUnit;
     }
 
+    public int getNumerator(){
+        return this.numerator;
+    }
+    public TimeUnit getNumeratorUnit(){
+        return this.numeratorUnit;
+    }
+    public int getDenominator(){
+        return this.denominator;
+    }
+    public TimeUnit getDenominatorUnit(){
+        return  this.denominatorUnit;
+    }
+
 
     public long timeFormat(){
-        long remainingTime = 0L;
-        remainingTime = numerator*TimeUnit.fromTimeUnitToLong(numeratorUnit);
-        return remainingTime;
+        return  numerator*TimeUnit.fromTimeUnitToLong(numeratorUnit);
     }
 
     public long timeFormatWithCycle(){
-        long cycleTime = 0L;
-        cycleTime = denominator*TimeUnit.fromTimeUnitToLong(denominatorUnit);
-        return cycleTime;
+        return denominator*TimeUnit.fromTimeUnitToLong(denominatorUnit);
     }
-
-  //  public static
 
 
 

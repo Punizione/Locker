@@ -25,11 +25,13 @@ public class Rule {
         this.cycleTime = cycle.timeFormatWithCycle();
     }
 
-    public Rule(String packageName, long lessTime, long RuleLessTime, long cycleTime, long RuleycleTime,boolean isWorking){
+    public Rule(String packageName, long lessTime, long RuleLessTime, long cycleTime, long RuleCycleTime,boolean isWorking){
         this.targetApp = InfoUtil.getAppInfoByPakcageName(packageName);
         this.isWorking = isWorking;
 
-     //   this.cycle =
+        this.cycle = new TimeCycle(RuleLessTime, RuleCycleTime);
+        this.remainingTime = lessTime;
+        this.cycleTime = cycleTime;
     }
     public AppInfo getTargetApp(){
         return targetApp;

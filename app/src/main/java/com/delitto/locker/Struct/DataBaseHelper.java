@@ -11,13 +11,16 @@ import com.delitto.locker.Tools.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.delitto.locker.Struct.LockerDBSchema.RuleTable;
+import com.delitto.locker.Struct.LockerDBSchema.RuleTable.Cols;
 /**
  * Created by Delitto on 2017/10/4.
  */
 
+
 public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DataBaseHelper";
-    private static final String DatabaseName = "locker.db";
+    private static final String DatabaseName = "Locker.db";
     private static final int version = 1;
 
     private SQLiteDatabase db = null;
@@ -27,27 +30,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        String sql = "create table rule(" +
-                    "packagename varchar(100) not null, " +
-                    "lesstime int not null, " +
-                    "cycletime int not null, " +
-                    "rulelesstime int not null, " +
-                    "rulecycletime int not null" +
+        String sql = "create table " + RuleTable.NAME + "(" +
+                    Cols.PACKAGENAME+" not null, " +
+                    Cols.LESSTIME+" not null, " +
+                    Cols.CYCLETIME+" not null, " +
+                    Cols.RULELESSTIME+" not null, " +
+                    Cols.RULECYCLETIME+" not null" +
+                    Cols.ISWORKING+" not null" +
                 "); ";
         db.execSQL(sql);
     }
     @Override
-    public void onUpgrade(SQLiteDatabase db, int lodVersion, int newVersion){
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         //TODO
     }
 
-    public void insert(String packageName, long lestTime, long cycleTime, long ruleLessTime, long ruleCycleTime){
+    public void insert(String packageName, long lestTime, long cycleTime, long ruleLessTime, long ruleCycleTime, boolean isWorking){
         if(db==null){
             db = this.getWritableDatabase();
         }
-        String sql = "insert into rule(packagename, lesstime, cycletime, rulelesstime, rulecycletime) values(?,?,?,?,?)";
+        String sql = "insert into "+RuleTable.NAME+"(" +
+                Cols.PACKAGENAME + ", " +
+                Cols.LESSTIME +", " +
+                Cols.CYCLETIME +", " +
+                Cols.RULELESSTIME +", " +
+                Cols.RULECYCLETIME +", " +
+                Cols.ISWORKING +") values(?,?,?,?,?,?)";
         try{
-            db.execSQL(sql, new Object[]{packageName, lestTime, cycleTime, ruleLessTime, ruleCycleTime});
+            db.execSQL(sql, new Object[]{packageName, lestTime, cycleTime, ruleLessTime, ruleCycleTime, isWorking});
         }catch(Exception e){
             e.printStackTrace();
             Log.e(TAG, "insert error");
@@ -73,29 +83,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db = null;
     }
 
-    public void update(int filter, String packageName, long data)throws Exception{
+    public void update(int filter, String packageName, Object data)throws Exception{
         if(db == null){
             db = this.getWritableDatabase();
         }
         String dataFrom;
         switch (filter){
             case Constants.UPDATE_LESSTIME:
-                dataFrom = "lesstime";
+                dataFrom = Cols.LESSTIME;
                 break;
             case Constants.UPDATE_CYCLETIME:
-                dataFrom = "cycletime";
+                dataFrom = Cols.CYCLETIME;
                 break;
             case Constants.UPDATE_RULE_LESSTIME:
-                dataFrom = "rulelesstime";
+                dataFrom = Cols.RULELESSTIME;
                 break;
             case Constants.UPDATE_RULE_CYCLETIME:
-                dataFrom = "rulecycletime";
+                dataFrom = Cols.RULECYCLETIME;
+                break;
+            case Constants.UPDATE_RULE_ISWORKING:
+                dataFrom = Cols.ISWORKING;
                 break;
             default:
                 throw new Exception("Illegal Parameter");
         }
         // update rule set dateFrom = 'data' where packagename = 'packagename'
-        String sql = "update rule set "+dataFrom+" = '"+data+"' where packagename = '"+packageName+"'";
+        String sql = "update "+RuleTable.NAME+
+                " set "+dataFrom+" = '"+data+
+                "' where "+Cols.PACKAGENAME+" = '"+packageName+"'";
         try{
             db.execSQL(sql);
         }catch(Exception e){
@@ -113,7 +128,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         Cursor c = null;
         try{
-            c = db.query("rule",null,null,null,null,null,null,null);
+            c = db.query(RuleTable.NAME,null,null,null,null,null,null,null);
         }catch (Exception e){
             e.printStackTrace();
             Log.e(TAG, "select error");
@@ -130,7 +145,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if(c.moveToFirst()){
             for(int i=0;i<c.getCount();i++){
                 //TODO
-                list.add(new Rule());
+                c.move(i);
+                list.add(
+                        new Rule(
+                            c.getString(c.getColumnIndex(Cols.PACKAGENAME)),
+                            c.getLong(c.getColumnIndex(Cols.LESSTIME)),
+                            c.getLong(c.getColumnIndex(Cols.CYCLETIME)),
+                            c.getLong(c.getColumnIndex(Cols.RULELESSTIME)),
+                            c.getLong(c.getColumnIndex(Cols.RULECYCLETIME)),
+                            Boolean.valueOf(c.getString(c.getColumnIndex(Cols.ISWORKING)))
+                        )
+                );
             }
         }
         return list;
