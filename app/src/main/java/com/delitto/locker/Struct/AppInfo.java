@@ -54,4 +54,6 @@ public class AppInfo {
         Log.v("app","Name:"+appName);
         Log.v("app","Package:"+packageName);
     }
+
+
 }

@@ -12,6 +12,15 @@ public class TimeCycle {
     private int denominator;
     private TimeUnit denominatorUnit;
 
+    public TimeCycle(){}
+
+    public TimeCycle(int numerator,TimeUnit numeratorUnit, int denominator,TimeUnit denominatorUnit){
+        setNumerator(numerator);
+        setNumeratorUnit(numeratorUnit);
+        setDenominator(denominator);
+        setDenominatorUnit(denominatorUnit);
+    }
+
     public void setNumerator(int numerator) {
         this.numerator = numerator;
     }
@@ -28,24 +37,21 @@ public class TimeCycle {
         this.denominatorUnit = denominatorUnit;
     }
 
-    public TimeCycle(){}
 
-    public TimeCycle(int numerator,TimeUnit numeratorUnit, int denominator,TimeUnit denominatorUnit){
-        setNumerator(numerator);
-        setNumeratorUnit(numeratorUnit);
-        setDenominator(denominator);
-        setDenominatorUnit(denominatorUnit);
-    }
     public long timeFormat(){
         long remainingTime = 0L;
-        remainingTime = numerator*TimeUnit.format(numeratorUnit);
+        remainingTime = numerator*TimeUnit.fromTimeUnitToLong(numeratorUnit);
         return remainingTime;
     }
 
     public long timeFormatWithCycle(){
         long cycleTime = 0L;
-        cycleTime = denominator*TimeUnit.format(denominatorUnit);
+        cycleTime = denominator*TimeUnit.fromTimeUnitToLong(denominatorUnit);
         return cycleTime;
     }
+
+  //  public static
+
+
 
 }

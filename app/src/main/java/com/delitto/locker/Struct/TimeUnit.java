@@ -13,7 +13,7 @@ public enum TimeUnit {
     Week,
     Month;
 
-    public static long format(TimeUnit tu){
+    public static long fromTimeUnitToLong(TimeUnit tu){
         long res = 0L;
         switch (tu){
             case Minute:
@@ -33,5 +33,19 @@ public enum TimeUnit {
                 break;
         }
         return res;
+    }
+
+    public static TimeUnit fromLongToTimeUnit(long time){
+        if(time >= fromTimeUnitToLong(TimeUnit.Month)){
+            return TimeUnit.Month;
+        }else if(time >= fromTimeUnitToLong(TimeUnit.Week)){
+            return TimeUnit.Week;
+        }else if(time >= fromTimeUnitToLong(TimeUnit.Day)){
+            return TimeUnit.Day;
+        }else  if(time >= fromTimeUnitToLong(TimeUnit.Hour)){
+            return TimeUnit.Hour;
+        }else{
+            return TimeUnit.Minute;
+        }
     }
 }

@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 
 import com.delitto.locker.Activity.MainActivity;
 import com.delitto.locker.Activity.SelectActivity;
+import com.delitto.locker.AppContext;
 import com.delitto.locker.Struct.AppInfo;
 
 import android.app.Activity;
@@ -48,5 +49,58 @@ public class InfoUtil {
         }
 
         return list;
+    }
+
+
+    /**
+     *  Using AppContext instead of param Context
+     * @param systemfilter
+     * @return
+     */
+    public static List<AppInfo> getAllAppInfo(int systemfilter){
+        List<AppInfo> list = new ArrayList<>();
+        List<PackageInfo> packages = AppContext.getInstance().getPackageManager().getInstalledPackages(0);
+        for(PackageInfo packageInfo : packages){
+            AppInfo tempInfo = new AppInfo();
+            tempInfo.setAppNmae(packageInfo.applicationInfo.loadLabel(AppContext.getInstance().getPackageManager()).toString());
+            tempInfo.setPackageName(packageInfo.packageName);
+            tempInfo.setAppIcon(packageInfo.applicationInfo.loadIcon(AppContext.getInstance().getPackageManager()));
+            if(systemfilter == Constants.USER_INSTALLED_APPLICATIONS){
+                if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0){
+                    list.add(tempInfo);
+
+
+                }
+            }else if(systemfilter == Constants.SYSTEM_INSTALLED_APPLICATIONS){
+                if((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) > 0){
+                    list.add(tempInfo);
+
+                }
+            }else if(systemfilter == Constants.ALL_APPLICATIONS){
+                list.add(tempInfo);
+
+            }
+        }
+
+        return list;
+    }
+
+
+
+
+
+    public static AppInfo getAppInfoByPakcageName(String packageName){
+        AppInfo retInfo = null;
+        List<PackageInfo> infos = AppContext.getInstance().getPackageManager().getInstalledPackages(0);
+        for(PackageInfo info:infos){
+            if(info.packageName.equals(packageName)){
+                retInfo = new AppInfo();
+                retInfo.setAppNmae(info.applicationInfo.loadLabel(AppContext.getInstance().getPackageManager()).toString());
+                retInfo.setPackageName(packageName);
+                retInfo.setAppIcon(info.applicationInfo.loadIcon(AppContext.getInstance().getPackageManager()));
+                break;
+            }
+        }
+        return retInfo;
     }
 }

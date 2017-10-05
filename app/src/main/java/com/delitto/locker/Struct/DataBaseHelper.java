@@ -123,12 +123,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db = null;
         return c;
     }
+
     public List<Rule> getAllRules(){
         Cursor c = select();
         List<Rule> list = new ArrayList<>();
         if(c.moveToFirst()){
             for(int i=0;i<c.getCount();i++){
                 //TODO
+                list.add(new Rule());
             }
         }
         return list;

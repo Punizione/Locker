@@ -1,5 +1,7 @@
 package com.delitto.locker.Struct;
 
+import com.delitto.locker.Tools.InfoUtil;
+
 /**
  * Created by Delitto on 2017/9/14.
  */
@@ -9,16 +11,25 @@ public class Rule {
     private boolean isWorking;
     private TimeCycle cycle;
 
+    private TimeCycle less;
     private long remainingTime;
     private long cycleTime;
     public Rule(){ }
 
     public Rule(AppInfo targetApp, TimeCycle cycle){
         this.targetApp = targetApp;
-        this.cycle = cycle;
         this.isWorking = true;
+        this.cycle = cycle;
+
         this.remainingTime = cycle.timeFormat();
         this.cycleTime = cycle.timeFormatWithCycle();
+    }
+
+    public Rule(String packageName, long lessTime, long RuleLessTime, long cycleTime, long RuleycleTime,boolean isWorking){
+        this.targetApp = InfoUtil.getAppInfoByPakcageName(packageName);
+        this.isWorking = isWorking;
+
+     //   this.cycle =
     }
     public AppInfo getTargetApp(){
         return targetApp;
