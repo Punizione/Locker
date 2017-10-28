@@ -26,7 +26,7 @@ public class Rule {
     }
 
     public Rule(String packageName, long lessTime, long RuleLessTime, long cycleTime, long RuleCycleTime,boolean isWorking){
-        this.targetApp = InfoUtil.getAppInfoByPakcageName(packageName);
+        this.targetApp = InfoUtil.getAppInfoByPackageName(packageName);
         this.isWorking = isWorking;
 
         this.cycle = new TimeCycle(RuleLessTime, RuleCycleTime);

@@ -149,9 +149,9 @@ public class SelectActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Integer code){
 //                TestUtil.makeTest(SelectActivity.this, "Execute");
-                if(code == Constants.GET_APPINFO_ERROR){
+                if(code.intValue() == Constants.GET_APPINFO_ERROR){
                     Toast.makeText(getBaseContext(),"刷新失败",Toast.LENGTH_SHORT).show();
-                }else if(code == Constants.GET_APPINFO_SUCCESS){
+                }else if(code.intValue() == Constants.GET_APPINFO_SUCCESS){
                     //真让人摸不着头脑.jpg
                     if(mAdapter == null){
                         mAdapter =  new AppInfoAdapter(list);

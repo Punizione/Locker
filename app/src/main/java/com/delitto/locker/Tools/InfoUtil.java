@@ -89,7 +89,7 @@ public class InfoUtil {
 
 
 
-    public static AppInfo getAppInfoByPakcageName(String packageName){
+    public static AppInfo getAppInfoByPackageName(String packageName){
         AppInfo retInfo = null;
         List<PackageInfo> infos = AppContext.getInstance().getPackageManager().getInstalledPackages(0);
         for(PackageInfo info:infos){
